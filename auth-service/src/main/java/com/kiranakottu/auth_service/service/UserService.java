@@ -46,23 +46,10 @@ public class UserService {
         return userRepository.save(user);// In real applications, hash the password
     }
 
-    // GETTER METHODS
-    public User getUserByEmail(String email) {
+    public User findByUsernameOrEmail(String usernameOrEmail) {
         return userRepository
-                .findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
-    public User getUserById(UUID id) {
-        return userRepository
-                .findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
-    public User getUserByUsername(String username) {
-        return userRepository
-                .findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
     }
 
 
