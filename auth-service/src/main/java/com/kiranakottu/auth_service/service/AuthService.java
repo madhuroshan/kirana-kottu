@@ -19,10 +19,6 @@ public class AuthService {
     public LoginResponseDTO authenticate(String usernameOrEmail, String password) {
         // Authenticate user
         User user = userService.findByUsernameOrEmail(usernameOrEmail);
-        if (user == null) {
-            throw new RuntimeException("User not found");
-        }
-
         String passwordHash = user.getPassword();
         boolean match = passwordEncoder.matches(password, passwordHash);
         if (!match) {

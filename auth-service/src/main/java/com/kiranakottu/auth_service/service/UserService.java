@@ -49,7 +49,7 @@ public class UserService {
     public User findByUsernameOrEmail(String usernameOrEmail) {
         return userRepository
                 .findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
     }
 
 
