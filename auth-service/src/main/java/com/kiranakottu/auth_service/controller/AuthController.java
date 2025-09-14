@@ -1,5 +1,7 @@
 package com.kiranakottu.auth_service.controller;
 
+import com.kiranakottu.auth_service.dto.LoginRequestDTO;
+import com.kiranakottu.auth_service.dto.LoginResponseDTO;
 import com.kiranakottu.auth_service.dto.SignupRequestDTO;
 import com.kiranakottu.auth_service.dto.SignupResponseDTO;
 import com.kiranakottu.auth_service.entity.User;
@@ -42,6 +44,24 @@ public class AuthController {
                     e.getMessage()
             ));
         }
+    }
+
+    @RequestMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+
+        try {
+            LoginResponseDTO responseDTO = authService.authenticate(
+                    loginRequestDTO.getUsernameOrEmail(),
+                    loginRequestDTO.getPassword()
+            );
+            return ResponseEntity.ok(responseDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new LoginResponseDTO(
+                    null,
+                    e.getMessage()
+            ));
+        }
+
     }
 
 
