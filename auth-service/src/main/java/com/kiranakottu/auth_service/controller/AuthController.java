@@ -8,6 +8,7 @@ import com.kiranakottu.auth_service.entity.User;
 import com.kiranakottu.auth_service.service.AuthService;
 import com.kiranakottu.auth_service.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @RequestMapping("/signup")
+    @PostMapping("/signup")
     public ResponseEntity<SignupResponseDTO> signup(@RequestBody SignupRequestDTO signupRequestDTO) {
         try {
             User user = userService.registerUser(signupRequestDTO);
@@ -46,7 +47,7 @@ public class AuthController {
         }
     }
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
 
         try {
